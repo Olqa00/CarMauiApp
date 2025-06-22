@@ -4,5 +4,5 @@ using CarMauiApp.Application.Models;
 
 public interface ICarService
 {
-    List<CarModel> GetCars();
+    Task<IReadOnlyList<CarModel>> GetCarsAsync();
 }

@@ -5,7 +5,7 @@ using CarMauiApp.Application.Models;
 
 internal sealed class CarService : ICarService
 {
-    public List<CarModel> GetCars()
+    public async Task<IReadOnlyList<CarModel>> GetCarsAsync()
     {
         var car1 = new CarModel
         {

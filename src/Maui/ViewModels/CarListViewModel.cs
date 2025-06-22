@@ -4,19 +4,23 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using CarMauiApp.Application.Interfaces;
 using CarMauiApp.Application.Models;
+using CarMauiApp.Application.Queries;
+using MediatR;
 
 public class CarListViewModel : BaseViewModel
 {
     private readonly ICarService carService;
+    private readonly ISender? mediator;
     public ObservableCollection<CarModel> Cars { get; private set; } = [];
 
-    public CarListViewModel(ICarService carService)
+    public CarListViewModel(ICarService carService, ISender? mediator)
     {
         this.Title = "Car List";
+        this.mediator = mediator;
         this.carService = carService;
     }
 
-    public async Task GetCarListAsync()
+    public async Task GetCarListAsync(CancellationToken cancellationToken = default)
     {
         if (this.IsBusy)
         {
@@ -32,7 +36,9 @@ public class CarListViewModel : BaseViewModel
                 this.Cars.Clear();
             }
 
-            var cars = await Task.Run(() => this.carService.GetCars()); //TODO CQRS
+            var query = new GetCars();
+
+            var cars = await this.mediator.Send(query, cancellationToken);
             this.Cars = new ObservableCollection<CarModel>(cars);
         }
         catch (Exception ex)
