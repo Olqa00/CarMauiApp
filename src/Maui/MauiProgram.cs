@@ -22,8 +22,8 @@ public static class MauiProgram
             .AddApplication()
             .AddInfrastructure(builder.Configuration);
 
-        builder.Services.AddSingleton<MainPage>();
-        builder.Services.AddSingleton<CarListViewModel>(); //TODO Move
+        builder.Services.AddTransient<CarListViewModel>();
+        builder.Services.AddTransient<MainPage>(); //TODO Move
 
 #if DEBUG
         builder.Logging.AddDebug();

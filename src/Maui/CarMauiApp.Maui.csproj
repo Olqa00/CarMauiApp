@@ -70,7 +70,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Using Include="CommunityToolkit.Mvvm.Input" />
 	  <Using Include="Microsoft.Extensions.Logging" />
+	  <Using Include="System.Collections.ObjectModel" />
+	  <Using Include="System.Diagnostics" />
 	</ItemGroup>
 
 </Project>
