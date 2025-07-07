@@ -1,17 +1,17 @@
 ﻿namespace CarMauiApp.Maui.ViewModels;
 
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using CarMauiApp.Application.Interfaces;
 using CarMauiApp.Application.Models;
 using CarMauiApp.Application.Queries;
-using CommunityToolkit.Mvvm.Input;
-using MediatR;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-public class CarListViewModel : BaseViewModel
+public partial class CarListViewModel : BaseViewModel
 {
     private readonly ICarService carService;
     private readonly ISender? mediator;
+
+    [ObservableProperty]
+    private bool isRefreshing;
 
     public ObservableCollection<CarModel> Cars { get; private set; } = [];
 

@@ -7,19 +7,25 @@
              x:Class="CarMauiApp.Maui.MainPage">
 
     <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*, Auto">
-        <CollectionView Grid.ColumnSpan="2" ItemsSource="{Binding Cars}" SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:CarModel">
-                    <Border HeightRequest="90">
-                        <HorizontalStackLayout Padding="10" Spacing="5">
-                            <Label Text="{Binding Make}"/>
-                            <Label Text="{Binding Model}"/>
-                        </HorizontalStackLayout>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-        <Button Text="Fetch Cars" Command="{Binding GetCarListAsyncCommand}" IsEnabled="{Binding IsNotBusy}" Grid.Row="1" Grid.Column="0"/>
+        <RefreshView Grid.ColumnSpan="2" Command="{Binding GetCarListAsyncCommand}" IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView ItemsSource="{Binding Cars}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:CarModel">
+                        <Grid Padding="10">
+                            <Border HeightRequest="90">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="" CommandParameter=""/>
+                                </Border.GestureRecognizers>
+                                <HorizontalStackLayout Padding="10" Spacing="5">
+                                    <Label Text="{Binding Make}"/>
+                                    <Label Text="{Binding Model}"/>
+                                </HorizontalStackLayout>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        <Button Text="Fetch Cars" Command="{Binding GetCarListAsyncCommand}" IsEnabled="{Binding IsNotBusy}" Grid.Row="1" Grid.Column="0" Margin="10"/>
     </Grid>
 </ContentPage>
