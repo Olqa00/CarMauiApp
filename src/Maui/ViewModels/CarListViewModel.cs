@@ -3,6 +3,7 @@
 using CarMauiApp.Application.Interfaces;
 using CarMauiApp.Application.Models;
 using CarMauiApp.Application.Queries;
+using CarMauiApp.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 public partial class CarListViewModel : BaseViewModel
@@ -14,6 +15,7 @@ public partial class CarListViewModel : BaseViewModel
     private bool isRefreshing;
 
     public ObservableCollection<CarModel> Cars { get; private set; } = [];
+    public AsyncRelayCommand<CarModel> GetCarDetailsAsyncCommand { get; }
 
     public AsyncRelayCommand GetCarListAsyncCommand { get; }
 
@@ -22,7 +24,23 @@ public partial class CarListViewModel : BaseViewModel
         this.Title = "Car List";
         this.mediator = mediator;
         this.carService = carService;
+        this.GetCarDetailsAsyncCommand = new AsyncRelayCommand<CarModel>(this.GetCarDetailsAsync);
         this.GetCarListAsyncCommand = new AsyncRelayCommand(this.GetCarListAsync);
+    }
+
+    private async Task GetCarDetailsAsync(CarModel? carModel, CancellationToken cancellationToken = default)
+    {
+        if (carModel is null)
+        {
+            return;
+        }
+
+        await Shell.Current.GoToAsync(nameof(CarDetailsView),
+            animate: true,
+            new Dictionary<string, object>
+            {
+                { nameof(CarModel), carModel },
+            });
     }
 
     private async Task GetCarListAsync(CancellationToken cancellationToken = default)

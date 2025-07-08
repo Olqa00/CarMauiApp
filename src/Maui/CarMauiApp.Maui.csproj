@@ -77,4 +77,10 @@
 	  <Using Include="System.Diagnostics" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="Views\CarDetailsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

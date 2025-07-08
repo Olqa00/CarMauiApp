@@ -1,24 +1,31 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:model="clr-namespace:CarMauiApp.Application.Models;assembly=CarMauiApp.Application"
-             xmlns:viewModel="clr-namespace:CarMauiApp.Maui.ViewModels"
-             x:DataType="viewModel:CarListViewModel"
-             Title="{Binding Title}"
-             x:Class="CarMauiApp.Maui.MainPage">
+﻿<ContentPage
+    x:Class="CarMauiApp.Maui.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:CarMauiApp.Application.Models;assembly=CarMauiApp.Application"
+    xmlns:viewModel="clr-namespace:CarMauiApp.Maui.ViewModels"
+    Title="{Binding Title}"
+    x:DataType="viewModel:CarListViewModel">
 
-    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*, Auto">
-        <RefreshView Grid.ColumnSpan="2" Command="{Binding GetCarListAsyncCommand}" IsRefreshing="{Binding IsRefreshing}">
+    <Grid
+        ColumnDefinitions="*,*"
+        ColumnSpacing="5"
+        RowDefinitions="*, Auto">
+        <RefreshView
+            Grid.ColumnSpan="2"
+            Command="{Binding GetCarListAsyncCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
             <CollectionView ItemsSource="{Binding Cars}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:CarModel">
                         <Grid Padding="10">
                             <Border HeightRequest="90">
                                 <Border.GestureRecognizers>
-                                    <TapGestureRecognizer Command="" CommandParameter=""/>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CarListViewModel}}, Path=GetCarDetailsAsyncCommand}" CommandParameter="{Binding .}" />
                                 </Border.GestureRecognizers>
                                 <HorizontalStackLayout Padding="10" Spacing="5">
-                                    <Label Text="{Binding Make}"/>
-                                    <Label Text="{Binding Model}"/>
+                                    <Label Text="{Binding Make}" />
+                                    <Label Text="{Binding Model}" />
                                 </HorizontalStackLayout>
                             </Border>
                         </Grid>
@@ -26,6 +33,12 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
-        <Button Text="Fetch Cars" Command="{Binding GetCarListAsyncCommand}" IsEnabled="{Binding IsNotBusy}" Grid.Row="1" Grid.Column="0" Margin="10"/>
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="10"
+            Command="{Binding GetCarListAsyncCommand}"
+            IsEnabled="{Binding IsNotBusy}"
+            Text="Fetch Cars" />
     </Grid>
 </ContentPage>
