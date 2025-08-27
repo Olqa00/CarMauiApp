@@ -6,11 +6,19 @@ public static class DependencyInjection
 
     public static IServiceCollection AddSqlServer(this IServiceCollection services, IConfiguration configuration)
     {
+        if (!configuration.GetSection(OPTIONS_SECTION_NAME).Exists())
+        {
+            throw new Exception($"Section '{OPTIONS_SECTION_NAME}' not found in configuration!");
+        }
+
         var section = configuration.GetSection(OPTIONS_SECTION_NAME);
         services.Configure<SqlServerOptions>(section);
         var options = configuration.GetOptions<SqlServerOptions>(OPTIONS_SECTION_NAME);
 
-        services.AddDbContext<CarMauiDbContext>(option => option.UseSqlServer(options.ConnectionString));
+        options.InitializeStaticConnection();
+
+        services.AddDbContext<CarMauiDbContext>(option => option.UseSqlServer(options.ConnectionString,
+            b => b.MigrationsAssembly(typeof(CarMauiDbContext).Assembly.FullName)));
 
         return services;
     }

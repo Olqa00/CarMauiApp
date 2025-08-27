@@ -2,7 +2,7 @@
 
 using CarMauiApp.Domain.Entities;
 
-internal sealed class CarMauiDbContext : DbContext
+public sealed class CarMauiDbContext : DbContext
 {
     public DbSet<CarEntity> Cars { get; set; }
 

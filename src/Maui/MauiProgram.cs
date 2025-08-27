@@ -4,12 +4,19 @@ using CarMauiApp.Application;
 using CarMauiApp.Infrastructure;
 using CarMauiApp.Maui.ViewModels;
 using CarMauiApp.Maui.Views;
+using Microsoft.Extensions.Configuration;
 
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+
+        var config = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        builder.Configuration.AddConfiguration(config);
 
         builder
             .UseMauiApp<App>()

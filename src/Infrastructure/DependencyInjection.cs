@@ -2,6 +2,7 @@
 
 using CarMauiApp.Application.Interfaces;
 using CarMauiApp.Infrastructure.Services;
+using CarMauiApp.Infrastructure.SqlServer;
 
 public static class DependencyInjection
 {
@@ -12,6 +13,7 @@ public static class DependencyInjection
 
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
+        services.AddSqlServer(configuration);
         services.AddScoped<ICarService, CarService>();
 
         return services;
