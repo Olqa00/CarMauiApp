@@ -16,6 +16,7 @@ public sealed class CarMauiDbContextFactory : IDesignTimeDbContextFactory<CarMau
         var configuration = new ConfigurationBuilder()
             .SetBasePath(basePath)
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddUserSecrets<CarMauiDbContextFactory>()
             .Build();
 
         var connectionString = configuration.GetSection(OPTIONS_SECTION_NAME)[OPTIONS_CONNECTION_STRING];
