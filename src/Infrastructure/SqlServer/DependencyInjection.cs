@@ -15,8 +15,6 @@ public static class DependencyInjection
         services.Configure<SqlServerOptions>(section);
         var options = configuration.GetOptions<SqlServerOptions>(OPTIONS_SECTION_NAME);
 
-        options.InitializeStaticConnection();
-
         services.AddDbContext<CarMauiDbContext>(option => option.UseSqlServer(options.ConnectionString,
             b => b.MigrationsAssembly(typeof(CarMauiDbContext).Assembly.FullName)));
 
