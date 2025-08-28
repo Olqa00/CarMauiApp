@@ -1,7 +1,6 @@
 ﻿namespace CarMauiApp.Maui.ViewModels;
 
 using CarMauiApp.Application.Commands;
-using CarMauiApp.Application.Interfaces;
 using CarMauiApp.Application.Models;
 using CarMauiApp.Application.Queries;
 using CarMauiApp.Maui.Views;
@@ -9,7 +8,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 public partial class CarListViewModel : BaseViewModel
 {
-    private readonly ICarRepository carService;
     private readonly ISender? mediator;
 
     [ObservableProperty]
@@ -28,18 +26,17 @@ public partial class CarListViewModel : BaseViewModel
 
     public ObservableCollection<CarModel> Cars { get; private set; } = [];
     public AsyncRelayCommand<Guid> DeleteCarAsyncCommand { get; }
-    public AsyncRelayCommand<CarModel> GetCarDetailsAsyncCommand { get; }
+    public AsyncRelayCommand<Guid> GetCarDetailsAsyncCommand { get; }
 
     public AsyncRelayCommand GetCarListAsyncCommand { get; }
 
-    public CarListViewModel(ICarRepository carService, ISender? mediator)
+    public CarListViewModel(ISender? mediator)
     {
         this.Title = "Car List";
         this.mediator = mediator;
-        this.carService = carService;
         this.AddCarAsyncCommand = new AsyncRelayCommand(this.AddCarAsync);
         this.DeleteCarAsyncCommand = new AsyncRelayCommand<Guid>(this.DeleteCarAsync);
-        this.GetCarDetailsAsyncCommand = new AsyncRelayCommand<CarModel>(this.GetCarDetailsAsync);
+        this.GetCarDetailsAsyncCommand = new AsyncRelayCommand<Guid>(this.GetCarDetailsAsync);
         this.GetCarListAsyncCommand = new AsyncRelayCommand(this.GetCarListAsync);
     }
 
@@ -128,19 +125,14 @@ public partial class CarListViewModel : BaseViewModel
         }
     }
 
-    private async Task GetCarDetailsAsync(CarModel? carModel, CancellationToken cancellationToken = default)
+    private async Task GetCarDetailsAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        if (carModel is null)
+        if (id == Guid.Empty)
         {
             return;
         }
 
-        await Shell.Current.GoToAsync(nameof(CarDetailsView),
-            animate: true,
-            new Dictionary<string, object>
-            {
-                { nameof(CarModel), carModel },
-            });
+        await Shell.Current.GoToAsync($"{nameof(CarDetailsView)}?Id={id}", animate: true);
     }
 
     private async Task GetCarListAsync(CancellationToken cancellationToken = default)
