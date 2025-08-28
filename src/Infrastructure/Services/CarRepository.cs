@@ -31,6 +31,27 @@ internal sealed class CarRepository : ICarRepository
         await this.dbContext.SaveChangesAsync();
     }
 
+    public async Task DeleteCarAsync(Guid id)
+    {
+        using var loggerScope = this.logger.BeginScope(
+            (CAR_ID, id)
+        );
+
+        this.logger.LogInformation("Try to delete car from db");
+
+        var carEntity = await this.cars.FirstOrDefaultAsync(car => car.Id == id);
+
+        if (carEntity is null)
+        {
+            this.logger.LogWarning("Car not found in db");
+
+            return;
+        }
+
+        this.cars.Remove(carEntity);
+        await this.dbContext.SaveChangesAsync();
+    }
+
     public async Task<IReadOnlyList<CarModel>> GetCarsAsync()
     {
         this.logger.LogInformation("Try to get cars from db");

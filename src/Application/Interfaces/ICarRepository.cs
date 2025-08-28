@@ -6,5 +6,6 @@ using CarMauiApp.Domain.Entities;
 public interface ICarRepository
 {
     Task AddCarAsync(CarEntity entity);
+    Task DeleteCarAsync(Guid id);
     Task<IReadOnlyList<CarModel>> GetCarsAsync();
 }
