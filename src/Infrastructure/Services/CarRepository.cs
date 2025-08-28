@@ -7,6 +7,7 @@ using CarMauiApp.Infrastructure.SqlServer;
 
 internal sealed class CarRepository : ICarRepository
 {
+    private const string CAR_ID = "carId";
     private readonly DbSet<CarEntity> cars;
     private readonly CarMauiDbContext dbContext;
     private readonly ILogger<CarRepository> logger;
@@ -16,6 +17,18 @@ internal sealed class CarRepository : ICarRepository
         this.cars = dbContext.Cars;
         this.dbContext = dbContext;
         this.logger = logger;
+    }
+
+    public async Task AddCarAsync(CarEntity entity)
+    {
+        using var loggerScope = this.logger.BeginScope(
+            (CAR_ID, entity.Id)
+        );
+
+        this.logger.LogInformation("Try to add car to db");
+
+        await this.cars.AddAsync(entity);
+        await this.dbContext.SaveChangesAsync();
     }
 
     public async Task<IReadOnlyList<CarModel>> GetCarsAsync()
