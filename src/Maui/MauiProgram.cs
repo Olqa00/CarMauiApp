@@ -14,6 +14,7 @@ public static class MauiProgram
 
         var config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
+            .AddUserSecrets<App>()
             .Build();
 
         builder.Configuration.AddConfiguration(config);

@@ -14,7 +14,7 @@ public static class DependencyInjection
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         services.AddSqlServer(configuration);
-        services.AddScoped<ICarService, CarService>();
+        services.AddScoped<ICarRepository, CarRepository>();
 
         return services;
     }

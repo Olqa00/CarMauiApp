@@ -2,7 +2,7 @@
 
 using CarMauiApp.Application.Models;
 
-public interface ICarService
+public interface ICarRepository
 {
     Task<IReadOnlyList<CarModel>> GetCarsAsync();
 }

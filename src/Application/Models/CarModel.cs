@@ -2,8 +2,8 @@
 
 public sealed record class CarModel
 {
-    public int Id { get; set; }
-    public string Make { get; set; } = string.Empty;
-    public string Model { get; set; } = string.Empty;
-    public string Vin { get; set; } = string.Empty;
+    public Guid Id { get; set; }
+    public string Make { get; init; } = string.Empty;
+    public string Model { get; init; } = string.Empty;
+    public string Vin { get; init; } = string.Empty;
 }

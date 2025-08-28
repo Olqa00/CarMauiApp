@@ -8,7 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 public partial class CarListViewModel : BaseViewModel
 {
-    private readonly ICarService carService;
+    private readonly ICarRepository carService;
     private readonly ISender? mediator;
 
     [ObservableProperty]
@@ -19,7 +19,7 @@ public partial class CarListViewModel : BaseViewModel
 
     public AsyncRelayCommand GetCarListAsyncCommand { get; }
 
-    public CarListViewModel(ICarService carService, ISender? mediator)
+    public CarListViewModel(ICarRepository carService, ISender? mediator)
     {
         this.Title = "Car List";
         this.mediator = mediator;
