@@ -20,7 +20,7 @@ public sealed class AddCarHandlerTests
 
     public AddCarHandlerTests()
     {
-        this.handler = new AddCarHandler(this.repository, this.logger);
+        this.handler = new AddCarHandler(this.logger, this.repository);
     }
 
     [TestMethod]
@@ -77,12 +77,12 @@ public sealed class AddCarHandlerTests
         };
 
         // Act
-        var action = async () => await this.handler.Handle(command, CancellationToken.None);
+        var act = async () => await this.handler.Handle(command, CancellationToken.None);
 
         // Assert
-        await action.Should()
+        await act.Should()
                 .ThrowAsync<CarAlreadyExistsException>()
-                .WithMessage($"Car with id '{CAR_ID}' already exists")
+                .WithMessage($"Car with id '{CAR_ID}' already exists.")
             ;
     }
 }

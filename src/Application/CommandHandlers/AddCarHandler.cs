@@ -11,10 +11,10 @@ internal sealed class AddCarHandler : IRequestHandler<AddCar>
     private readonly ILogger<AddCarHandler> logger;
     private readonly ICarRepository repository;
 
-    public AddCarHandler(ICarRepository repository, ILogger<AddCarHandler> logger)
+    public AddCarHandler(ILogger<AddCarHandler> logger, ICarRepository repository)
     {
-        this.repository = repository;
         this.logger = logger;
+        this.repository = repository;
     }
 
     public async Task Handle(AddCar request, CancellationToken cancellationToken)
