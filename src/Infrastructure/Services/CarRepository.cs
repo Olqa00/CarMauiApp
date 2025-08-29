@@ -52,6 +52,32 @@ internal sealed class CarRepository : ICarRepository
         await this.dbContext.SaveChangesAsync();
     }
 
+    public async Task<CarModel?> GetCarByIdAsync(Guid id)
+    {
+        using var loggerScope = this.logger.BeginScope(
+            (CAR_ID, id)
+        );
+
+        this.logger.LogInformation("Try to get car from db");
+
+        var carEntity = await this.cars.FirstOrDefaultAsync(car => car.Id == id);
+
+        if (carEntity is null)
+        {
+            return null;
+        }
+
+        var car = new CarModel
+        {
+            Id = id,
+            Make = carEntity.Make,
+            Model = carEntity.Model,
+            Vin = carEntity.Vin,
+        };
+
+        return car;
+    }
+
     public async Task<IReadOnlyList<CarModel>> GetCarsAsync()
     {
         this.logger.LogInformation("Try to get cars from db");

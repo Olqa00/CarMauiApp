@@ -1,6 +1,7 @@
 ﻿namespace CarMauiApp.Application.CommandHandlers;
 
 using CarMauiApp.Application.Commands;
+using CarMauiApp.Application.Exceptions;
 using CarMauiApp.Application.Interfaces;
 using CarMauiApp.Domain.Entities;
 
@@ -24,12 +25,12 @@ internal sealed class AddCarHandler : IRequestHandler<AddCar>
 
         this.logger.LogInformation("Try to add car");
 
-        //var car = await this.repository.GetCarByIdAsync(request.Id);
+        var car = await this.repository.GetCarByIdAsync(request.Id);
 
-        //if (car is not null)
-        //{
-        //    throw new CarAlreadyExistsException(request.Id);
-        //}
+        if (car is not null)
+        {
+            throw new CarAlreadyExistsException(request.Id);
+        }
 
         var carEntity = new CarEntity(request.Id, request.Make, request.Model, request.Vin);
 
