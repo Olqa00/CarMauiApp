@@ -25,6 +25,7 @@
     <Using Include="Microsoft.EntityFrameworkCore.Metadata.Builders" />
     <Using Include="Microsoft.Extensions.Configuration" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
+    <Using Include="Microsoft.Extensions.Logging" />
     <Using Include="System.Reflection" />
   </ItemGroup>
 
@@ -34,5 +35,9 @@
     <Nullable>enable</Nullable>
     <UserSecretsId>e208136d-7ad8-4996-bbc8-fa44a6a9abd9</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="CarMauiApp.Infrastructure.UnitTests" />
+  </ItemGroup>
 
 </Project>

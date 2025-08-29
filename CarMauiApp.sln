@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7B226B46
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarMauiApp.Domain.UnitTests", "tests\Domain.UnitTests\CarMauiApp.Domain.UnitTests.csproj", "{0E65DB7A-C816-4595-ACDE-F03484BBA622}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarMauiApp.Infrastructure.UnitTests", "tests\Infrastructure.UnitTests\CarMauiApp.Infrastructure.UnitTests.csproj", "{78F1E3A5-868F-4173-9587-7276AACB830F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarMauiApp.Application.UnitTests", "tests\Application.UnitTests\CarMauiApp.Application.UnitTests.csproj", "{EDB0D5DE-95D7-46A7-A78A-E44BE467C893}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +48,14 @@ Global
 		{0E65DB7A-C816-4595-ACDE-F03484BBA622}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E65DB7A-C816-4595-ACDE-F03484BBA622}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E65DB7A-C816-4595-ACDE-F03484BBA622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78F1E3A5-868F-4173-9587-7276AACB830F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78F1E3A5-868F-4173-9587-7276AACB830F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78F1E3A5-868F-4173-9587-7276AACB830F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78F1E3A5-868F-4173-9587-7276AACB830F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDB0D5DE-95D7-46A7-A78A-E44BE467C893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDB0D5DE-95D7-46A7-A78A-E44BE467C893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDB0D5DE-95D7-46A7-A78A-E44BE467C893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDB0D5DE-95D7-46A7-A78A-E44BE467C893}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,5 +66,7 @@ Global
 		{9C9CEC15-29C8-4C10-AD34-A45DD232212E} = {3D62D827-9EFD-480F-8152-4C7DDE822A1C}
 		{DF2EEA43-666E-4350-99C7-79A9E8189018} = {3D62D827-9EFD-480F-8152-4C7DDE822A1C}
 		{0E65DB7A-C816-4595-ACDE-F03484BBA622} = {7B226B46-E015-4183-99FD-F2F5D54331FE}
+		{78F1E3A5-868F-4173-9587-7276AACB830F} = {7B226B46-E015-4183-99FD-F2F5D54331FE}
+		{EDB0D5DE-95D7-46A7-A78A-E44BE467C893} = {7B226B46-E015-4183-99FD-F2F5D54331FE}
 	EndGlobalSection
 EndGlobal

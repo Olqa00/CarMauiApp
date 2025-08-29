@@ -1,36 +1,34 @@
-﻿using System;
+﻿#nullable disable
+
+namespace CarMauiApp.Infrastructure.Migrations;
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
-namespace CarMauiApp.Infrastructure.Migrations
+/// <inheritdoc />
+public partial class InitialCreate : Migration
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    protected override void Down(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.CreateTable(
-                name: "Cars",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Make = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Vin = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cars", x => x.Id);
-                });
-        }
+        migrationBuilder.DropTable(
+            name: "Cars");
+    }
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Cars");
-        }
+    /// <inheritdoc />
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.CreateTable(
+            "Cars",
+            table => new
+            {
+                Id = table.Column<Guid>("uniqueidentifier", nullable: false),
+                Make = table.Column<string>("nvarchar(max)", nullable: false),
+                Model = table.Column<string>("nvarchar(max)", nullable: false),
+                Vin = table.Column<string>("nvarchar(max)", nullable: false),
+            },
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_Cars", x => x.Id);
+            });
     }
 }
