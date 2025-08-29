@@ -23,7 +23,7 @@ public sealed class DeleteCarHandlerTests
     }
 
     [TestMethod]
-    public async Task Handle_ShouldDeleteCar_WhenCarExists()
+    public async Task Handle_Should_DeleteCar_When_CarExists()
     {
         // Arrange
         Guid? expectedId = null;
@@ -56,7 +56,7 @@ public sealed class DeleteCarHandlerTests
     }
 
     [TestMethod]
-    public async Task Handle_ShouldThrowCarNotFoundException_WhenCarDoesNotExist()
+    public async Task Handle_Should_ThrowCarNotFoundException_When_CarDoesNotExist()
     {
         // Arrange
         this.repository.GetCarByIdAsync(CAR_ID)

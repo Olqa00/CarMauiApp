@@ -24,7 +24,7 @@ public sealed class AddCarHandlerTests
     }
 
     [TestMethod]
-    public async Task Handle_ShouldAddCar_WhenCarDoesNotExist()
+    public async Task Handle_Should_AddCar_When_CarDoesNotExist()
     {
         // Arrange
         CarEntity? carEntity = null;
@@ -54,7 +54,7 @@ public sealed class AddCarHandlerTests
     }
 
     [TestMethod]
-    public async Task Handle_ShouldThrowCarAlreadyExistsException_WhenCarExists()
+    public async Task Handle_Should_ThrowCarAlreadyExistsException_When_CarExists()
     {
         // Arrange
         var existingCar = new CarModel
